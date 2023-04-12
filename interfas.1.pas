@@ -1,10 +1,11 @@
 program interfas;
-uses crt;
+uses crt,sysutils;
 type
   Persona = record
     nombre: string;
     apellido: string;
     cedula: string;
+    email:string;
     telefono: string;
   end;
 
@@ -14,6 +15,7 @@ con:boolean;
 grupo:array of persona;
 
 procedure individual;
+var reservacion_individual:text;
 begin
 
 repeat
@@ -29,13 +31,15 @@ SetLength(grupo,1);
     readln(grupo[1].apellido);
     write('C.I: ');
     readln(grupo[1].cedula);
+    write('correo electronico: ');
+    readln(grupo[1].email);
     write('numero de telefono: ');
     readln(grupo[1].telefono);
 
 write('digite la cantidad de dias que desean pasar: ');                                                                                      
 readln (dias);
   
-writeln(grupo[1].nombre,' ',grupo[1].apellido,' / C.I: ',grupo[1].cedula,'/ tlf: ',grupo[1].telefono);
+writeln(grupo[1].nombre,' ',grupo[1].apellido,' / C.I: ',grupo[1].cedula,' / tlf: ',grupo[1].telefono,' / email: ',grupo[1].email,'dias: ',dias);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=SI / 0=NO');
@@ -47,6 +51,7 @@ readln(respuesta);
 
 	end;
 until con = true;
+
 
 clrscr;
 
@@ -291,11 +296,37 @@ begin
 writeln('esperamos que vuelva a visitarnos')
 end;
 
+if FileExists('reservacion_individual.TXT') then
+begin
+assign(reservacion_individual, 'reservacion_individual.TXT');
+append(reservacion_individual);
+writeln(reservacion_individual);
+write(reservacion_individual,grupo[1].nombre,' ',grupo[1].apellido);
+write(reservacion_individual,' / C.I: ',grupo[1].cedula);
+write(reservacion_individual,' / tlf: ',grupo[1].telefono);
+write(reservacion_individual,' / email: ',grupo[1].email);
+write(reservacion_individual,'dias: ',dias);
+close(reservacion_individual);
+end
+else
+begin
+assign(reservacion_individual, 'reservacion_individual.TXT');
+rewrite(reservacion_individual);
+write(reservacion_individual,grupo[1].nombre,' ',grupo[1].apellido);
+write(reservacion_individual,' / C.I: ',grupo[1].cedula);
+write(reservacion_individual,' / tlf: ',grupo[1].telefono);
+write(reservacion_individual,' / email: ',grupo[1].email);
+writeln(reservacion_individual,'dias: ',dias);
+close(reservacion_individual);
+end;
+
+
 
 end;
 
 
 procedure acompanado;
+var reservacion_compania:text;
 begin
 
 con:=false;
@@ -314,10 +345,12 @@ SetLength(grupo,2);
     readln(grupo[i].apellido);
     write('C.I:');
     readln(grupo[i].cedula);
+    write('correo electronico: ');
+    readln(grupo[i].email);
     write('numero de telefono');
     readln(grupo[i].telefono);
   
-writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
+writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,' / tlf: ',grupo[i].telefono,' / email: ',grupo[i].email);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=Si / 0=No');
@@ -574,10 +607,42 @@ begin
 writeln('esperamos que vuelva a visitarnos')
 end;
 
+for i := 1 to 2 do
+begin
+
+if FileExists('reservacion_compania.TXT') then
+begin
+assign(reservacion_compania, 'reservacion_compania.TXT');
+append(reservacion_compania);
+writeln(reservacion_compania);
+write(reservacion_compania,grupo[i].nombre,' ',grupo[i].apellido);
+write(reservacion_compania,' / C.I: ',grupo[i].cedula);
+write(reservacion_compania,' / tlf: ',grupo[i].telefono);
+write(reservacion_compania,' / email: ',grupo[i].email);
+write(reservacion_compania,'dias: ',dias);
+close(reservacion_compania);
+end
+else
+begin
+assign(reservacion_compania, 'reservacion_compania.TXT');
+rewrite(reservacion_compania);
+write(reservacion_compania,grupo[i].nombre,' ',grupo[i].apellido);
+write(reservacion_compania,' / C.I: ',grupo[i].cedula);
+write(reservacion_compania,' / tlf: ',grupo[i].telefono);
+write(reservacion_compania,' / email: ',grupo[i].email);
+write(reservacion_compania,'dias: ',dias);
+close(reservacion_compania);
+end;
+end;
+
+
+
+
 end;
 
 
 procedure familiagrupo;
+var reservacion_grupo:text;
 begin
 
 
@@ -600,10 +665,12 @@ clrscr;
     readln(grupo[i].apellido);
     write('C.I:');
     readln(grupo[i].cedula);
+    write('correo electronico: ');
+    readln(grupo[i].email);
     write('numero de telefono');
     readln(grupo[i].telefono);
   
-writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
+writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,' / tlf: ',grupo[i].telefono,' / email: ',grupo[i].email);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=Si / 0=No');
@@ -861,6 +928,36 @@ begin
 writeln('esperamos que vuelva a visitarnos')
 end;
 
+for i := 1 to cantidad_personas do
+begin
+
+if FileExists('reservacion_grupo.TXT') then
+begin
+assign(reservacion_grupo, 'reservacion_grupo.TXT');
+append(reservacion_grupo);
+writeln(reservacion_grupo);
+write(reservacion_grupo,grupo[i].nombre,' ',grupo[i].apellido);
+write(reservacion_grupo,' / C.I: ',grupo[i].cedula);
+write(reservacion_grupo,' / tlf: ',grupo[i].telefono);
+write(reservacion_grupo,' / email: ',grupo[i].email);
+write(reservacion_grupo,'dias: ',dias);
+close(reservacion_grupo);
+end
+else
+begin
+assign(reservacion_grupo, 'reservacion_grupo.TXT');
+rewrite(reservacion_grupo);
+write(reservacion_grupo,grupo[i].nombre,' ',grupo[i].apellido);
+write(reservacion_grupo,' / C.I: ',grupo[i].cedula);
+write(reservacion_grupo,' / tlf: ',grupo[i].telefono);
+write(reservacion_grupo,' / email: ',grupo[i].email);
+write(reservacion_grupo,'dias: ',dias);
+close(reservacion_grupo);
+end;
+end;
+
+
+
 end;                                                                  
 
 
@@ -880,7 +977,7 @@ clrscr;
 
 begin
 
-writeln('seleccione el tipo de reservación que desea');
+writeln('seleccione el tipo de reservacion que desea');
   writeln(' --------------------------');
 	writeln('| 1) individual             |');
 	writeln('|                           |');
