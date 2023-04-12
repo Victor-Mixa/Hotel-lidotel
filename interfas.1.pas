@@ -1,82 +1,51 @@
 program interfas;
 uses crt;
-var res,nom,ape,ci,tlf,dias,resp: String;
-tip,opc,per,aux:integer;
+type
+  Persona = record
+    nombre: string;
+    apellido: string;
+    cedula: string;
+    telefono: string;
+  end;
+
+var res,dias,respuesta: String;
+tip,opcion,cantidad_personas,i :integer;
 con:boolean;
+grupo:array of persona;
 
 procedure individual;
 begin
 
 repeat
 con:=false;
-aux:=0;
 clrscr;
 
-	while aux=0 do
-		begin
-			writeln ('digite su nombre');
-			readln (nom);
-				case nom of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('nombre invalido')
-				end
-		end;
+SetLength(grupo,1);
 
-	while aux=1 do
-		begin
-			writeln ('digite su apellido ');
-			readln (ape);
-				case ape of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('apellido invalido');
-				end
-		end;
+ writeln('Por favor, ingrese sus datos');
+    write('Nombre:');
+    readln(grupo[1].nombre);
+    write('Apellido:');
+    readln(grupo[1].apellido);
+    write('C.I:');
+    readln(grupo[1].cedula);
+    write('numero de telefono');
+    readln(grupo[1].telefono);
 
-	while aux=2 do
-		begin
-			writeln ('digite su numero de cedula');
-			readln (ci);
-				case ci of
-				'0'..'9':aux:=aux+1
-				else 
-				writeln('cedula invalida');
-				end
-		end;
-
-	while aux=3 do
-		begin
-			writeln ('digite su numero de telefono');
-			readln (tlf);
-				case tlf of
-				'0'..'9':aux:=aux+1
-				else writeln('numero invalido invalida');
-				end
-		end;
-
-	while con=false do
-		begin
-			writeln ('digite la cantidad de dias que desea pasar en nuestro hotel');
-			readln (dias);
-				case dias of		
-				'1'..'9':con:=true
-				else 
-				writeln('ingrese un numero por favor')
-				end
-		end;
-
-writeln(nom,' ',ape,' ','C.I:',ci,' ','tlf',tlf,' ','dias:',dias);
+writeln ('digite la cantidad de dias que desean pasar');                                                                                      
+readln (dias);
+  
+writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=Si / 0=No');
-readln(resp);
-	case resp of
+readln(respuesta);
+	case respuesta of
 	'1':con:=true;
 	'si':con:=true;
 	else con:=false
 
-	end
+	end;
 until con = true;
 
 clrscr;
@@ -97,9 +66,9 @@ writeln(' -------------------------------');
 	writeln('|                              |');
 	writeln('-------------------------------');
 
- readln (opc);
+ readln (opcion);
  
- if opc=1 then
+ if opcion=1 then
 
 begin
 
@@ -156,7 +125,7 @@ writeln(' años sin recargas.');
 
 end;
 
-if (opc)=2 then
+if (opcion)=2 then
 begin
 
 
@@ -206,7 +175,7 @@ writeln(' nuestro moderno gimnasio y');
  writeln(' Kit de vanidades.Niño de 0 a 2 años sin recargas.');
  end;     
  
- if (opc)=3 then
+ if (opcion)=3 then
 
 begin
 
@@ -262,7 +231,7 @@ writeln(' Kit de vanidades. Niño de 0 a');
 writeln(' 2 años sin recargos.');
 end;
 
-if (opc)=4 then
+if (opcion)=4 then
 
 begin
 
@@ -317,7 +286,7 @@ writeln('años sin recargos.');
 
 end;
 
-if opc=5 then
+if opcion=5 then
 begin
 writeln('esperamos que vuelva a visitarnos')
 end;
@@ -329,78 +298,40 @@ end;
 procedure acompanado;
 begin
 
-repeat
 con:=false;
-aux:=0;
 clrscr;
 
-	while aux=0 do
-		begin
-			writeln ('digite su nombre completo');
-			readln (nom);
-				case nom of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('nombre invalido')
-				end
-		end;
-
-	while aux=1 do
-		begin
-			writeln ('digite el nombre completo de su acompañante');
-			readln (ape);
-				case ape of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('apellido invalido');
-				end
-		end;
-
-	while aux=2 do
-		begin
-			writeln ('digite su numero de cedula');
-			readln (ci);
-				case ci of
-				'0'..'9':aux:=aux+1
-				else 
-				writeln('cedula invalida');
-				end
-		end;
-
-	while aux=3 do
-		begin
-			writeln ('digite su numero de telefono');
-			readln (tlf);
-				case tlf of
-				'0'..'9':aux:=aux+1
-				else writeln('numero invalido invalida');
-				end
-		end;
-
-	while con=false do
-		begin
-			writeln ('digite la cantidad de dias que desea pasar en nuestro hotel');
-			readln (dias);
-				case dias of		
-				'1'..'9':con:=true
-				else 
-				writeln('ingrese un numero por favor')
-				end
-		end;
-
-writeln(nom,' ',ape,' ','C.I:',ci,' ','tlf',tlf,' ','dias:',dias);
+SetLength(grupo,2);
+  
+  {Pedir la información de cada adulto}
+  for i := 1 to 2 do
+  begin
+	repeat
+    writeln('Por favor, ingrese sus datos');
+    write('Nombre:');
+    readln(grupo[i].nombre);
+    write('Apellido:');
+    readln(grupo[i].apellido);
+    write('C.I:');
+    readln(grupo[i].cedula);
+    write('numero de telefono');
+    readln(grupo[i].telefono);
+  
+writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=Si / 0=No');
-readln(resp);
-	case resp of
+readln(respuesta);
+	case respuesta of
 	'1':con:=true;
 	'si':con:=true;
 	else con:=false
-
 	end
 until con = true;
+end;
 
+writeln ('digite la cantidad de dias que desean pasar');                                                                                      
+readln (dias);
 
 writeln ('elijan la habitacion que deseen');
 
@@ -418,9 +349,9 @@ writeln(' -------------------------------');
 	writeln('|                              |');
 	writeln('-------------------------------');
 
- readln (opc);
+ readln (opcion);
  
- if opc=1 then
+ if opcion=1 then
 
 begin
 
@@ -477,7 +408,7 @@ writeln(' años sin recargas.');
 
 end;
 
-if (opc)=2 then
+if (opcion)=2 then
 begin
 
 
@@ -527,7 +458,7 @@ writeln(' nuestro moderno gimnasio y');
  writeln(' Kit de vanidades.Niño de 0 a 2 años sin recargas.');
  end;     
  
- if (opc)=3 then
+ if (opcion)=3 then
 
 begin
 
@@ -583,7 +514,7 @@ writeln(' Kit de vanidades. Niño de 0 a');
 writeln(' 2 años sin recargos.');
 end;
 
-if (opc)=4 then
+if (opcion)=4 then
 
 begin
 
@@ -638,7 +569,7 @@ writeln('años sin recargos.');
 
 end;
 
-if opc=5 then
+if opcion=5 then
 begin
 writeln('esperamos que vuelva a visitarnos')
 end;
@@ -650,77 +581,44 @@ procedure familiagrupo;
 begin
 
 
-repeat
 con:=false;
-aux:=0;
 clrscr;
 
-	while aux=0 do
-		begin
-			writeln ('digite su nombre completo');
-			readln (nom);
-				case nom of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('nombre invalido')
-				end
-		end;
-
-	while aux=1 do
-		begin
-			writeln ('digite el nombre completo de su acompañante');
-			readln (ape);
-				case ape of
-				'a'..'z':aux:=aux+1
-				else 
-				writeln('apellido invalido');
-				end
-		end;
-
-	while aux=2 do
-		begin
-			writeln ('digite su numero de cedula');
-			readln (ci);
-				case ci of
-				'0'..'9':aux:=aux+1
-				else 
-				writeln('cedula invalida');
-				end
-		end;
-
-	while aux=3 do
-		begin
-			writeln ('digite su numero de telefono');
-			readln (tlf);
-				case tlf of
-				'0'..'9':aux:=aux+1
-				else writeln('numero invalido invalida');
-				end
-		end;
-
-	while con=false do
-		begin
-			writeln ('digite la cantidad de dias que desea pasar en nuestro hotel');
-			readln (dias);
-				case dias of		
-				'1'..'9':con:=true
-				else 
-				writeln('ingrese un numero por favor')
-				end
-		end;
-
-writeln(nom,' ',ape,' ','C.I:',ci,' ','tlf',tlf,' ','dias:',dias);
+ write('Por favor, ingrese el número de personas que conforman el grupo: ');
+  readln(cantidad_personas);
+  
+  {Crear el arreglo para almacenar la información de los adultos}
+  SetLength(grupo,cantidad_personas);
+  
+  {Pedir la información de cada adulto}
+  for i := 1 to cantidad_personas do
+  begin
+	repeat
+    writeln('Por favor, ingrese los datos de la persona ', i, ' del grupo:');
+    write('Nombre:');
+    readln(grupo[i].nombre);
+    write('Apellido:');
+    readln(grupo[i].apellido);
+    write('C.I:');
+    readln(grupo[i].cedula);
+    write('numero de telefono');
+    readln(grupo[i].telefono);
+  
+writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
 writeln('Son correctos estos datos?');
 writeln('=============================');
 writeln('1=Si / 0=No');
-readln(resp);
-	case resp of
+readln(respuesta);
+	case respuesta of
 	'1':con:=true;
 	'si':con:=true;
 	else con:=false
-
 	end
 until con = true;
+ end;
+
+writeln ('digite la cantidad de dias que desean pasar');                                                                                      
+readln (dias);
 
 
 writeln ('elijan la habitacion que deseen');
@@ -739,9 +637,9 @@ writeln(' -------------------------------');
 	writeln('|                              |');
 	writeln('-------------------------------');
 
- readln (opc);
+ readln (opcion);
  
- if opc=1 then
+ if opcion=1 then
 
 begin
 
@@ -798,7 +696,7 @@ writeln(' años sin recargas.');
 
 end;
 
-if (opc)=2 then
+if (opcion)=2 then
 begin
 
 
@@ -848,7 +746,7 @@ writeln(' nuestro moderno gimnasio y');
  writeln(' Kit de vanidades.Niño de 0 a 2 años sin recargas.');
  end;     
  
- if (opc)=3 then
+ if (opcion)=3 then
 
 begin
 
@@ -904,7 +802,7 @@ writeln(' Kit de vanidades. Niño de 0 a');
 writeln(' 2 años sin recargos.');
 end;
 
-if (opc)=4 then
+if (opcion)=4 then
 
 begin
 
@@ -959,7 +857,7 @@ writeln('años sin recargos.');
 
 end;
 
-if opc=5 then
+if opcion=5 then
 begin
 writeln('esperamos que vuelva a visitarnos')
 end;
@@ -995,8 +893,6 @@ writeln('seleccione el tipo de reservación que desea');
   readln (tip)
   
   
- 
-  
   
   end;
   
@@ -1010,6 +906,3 @@ begin
 acompanado
 end;
 end.
-
-
-  
