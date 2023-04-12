@@ -8,8 +8,8 @@ type
     telefono: string;
   end;
 
-var res,dias,respuesta: String;
-tip,opcion,cantidad_personas,i :integer;
+var tip,res,dias,respuesta: String;
+opcion,cantidad_personas,i :integer;
 con:boolean;
 grupo:array of persona;
 
@@ -23,26 +23,26 @@ clrscr;
 SetLength(grupo,1);
 
  writeln('Por favor, ingrese sus datos');
-    write('Nombre:');
+    write('Nombre: ');
     readln(grupo[1].nombre);
-    write('Apellido:');
+    write('Apellido: ');
     readln(grupo[1].apellido);
-    write('C.I:');
+    write('C.I: ');
     readln(grupo[1].cedula);
-    write('numero de telefono');
+    write('numero de telefono: ');
     readln(grupo[1].telefono);
 
-writeln ('digite la cantidad de dias que desean pasar');                                                                                      
+write('digite la cantidad de dias que desean pasar: ');                                                                                      
 readln (dias);
   
-writeln(grupo[i].nombre,' ',grupo[i].apellido,' / C.I: ',grupo[i].cedula,'/ tlf: ',grupo[i].telefono);
+writeln(grupo[1].nombre,' ',grupo[1].apellido,' / C.I: ',grupo[1].cedula,'/ tlf: ',grupo[1].telefono);
 writeln('Son correctos estos datos?');
 writeln('=============================');
-writeln('1=Si / 0=No');
+writeln('1=SI / 0=NO');
 readln(respuesta);
 	case respuesta of
 	'1':con:=true;
-	'si':con:=true;
+	'SI':con:=true;
 	else con:=false
 
 	end;
@@ -587,10 +587,9 @@ clrscr;
  write('Por favor, ingrese el número de personas que conforman el grupo: ');
   readln(cantidad_personas);
   
-  {Crear el arreglo para almacenar la información de los adultos}
+
   SetLength(grupo,cantidad_personas);
-  
-  {Pedir la información de cada adulto}
+
   for i := 1 to cantidad_personas do
   begin
 	repeat
@@ -862,21 +861,22 @@ begin
 writeln('esperamos que vuelva a visitarnos')
 end;
 
-end;
-// Victor de este encargate tu//                                                                     
-
+end;                                                                  
 
 
 //código principal//
 
+
 begin
 
+con:=false;
 
-
-
- WriteLn('bienvenido desea hacer una reservacion?');
+repeat
+clrscr;
+ WriteLn('Bienvenido a el Hotel Lidotel Boutique Margarita');
+ WriteLn('Si desea realizar una reservacion Escriba "SI" / en caso contrario escriba "NO"');
  readln (res);
- if (res = 'si') then
+ if (res = 'SI') then
 
 begin
 
@@ -886,23 +886,29 @@ writeln('seleccione el tipo de reservación que desea');
 	writeln('|                           |');
 	writeln('| 2) acompanado             |');
 	writeln('|                           |');
-	writeln('| 3) grupo/Familia         |');
+	writeln('| 3) grupo/Familia          |');
 	writeln('|                           |');
 	writeln('---------------------------');
   
-  readln (tip)
+  readln (tip);
   
-  
-  
+  case tip of
+  '1':individual;
+  '2':acompanado;
+  '3':familiagrupo
+  else writeln('opcion no valida')
   end;
-  
-  
-if tip =1 then
+end
+else if res='NO' then
 begin
-individual
-end;
-if tip=2 then
+writeln('Espero que vuelva a visitarnos');
+con:=true;
+end
+else 
 begin
-acompanado
+writeln('Ingreso una respuesta No valida, recuerde solo usar mayusculas');
+readln;
+clrscr;
 end;
+until con=true
 end.
